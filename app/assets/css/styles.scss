@@ -1,0 +1,1696 @@
+// Charolotte Hotels Reservations
+// Felipe Vegners - RV Front-End Test 2017, Nov.
+// felipevegners@gmail.com
+
+//Styles
+
+//Import fonts: Heebo / Montserrat
+@import url( 'https://fonts.googleapis.com/css?family=Heebo:300, 400,700|Montserrat:400,600');
+
+//Color Set
+$darkGray: #555555;
+$lightGray: #B5B5B5;
+$blueGray: #B2B0C0;
+$orange: #F98100;
+$darkOrange: #EE6F48;
+$green: #79BD1A;
+$star: #ffba23;
+@mixin gradientBar ($start-colour, $end-colour) {
+  background-color: $start-colour;
+  background-image: -webkit-gradient(linear, left top, left bottom, from($start-colour), to($end-colour));
+  background-image: -webkit-linear-gradient(top, $start-colour, $end-colour);
+  background-image: -moz-linear-gradient(top, $start-colour, $end-colour);
+  background-image: -ms-linear-gradient(top, $start-colour, $end-colour);
+  background-image: -o-linear-gradient(top, $start-colour, $end-colour);
+  background-image: linear-gradient(top, $start-colour, $end-colour);
+  filter: progid:DXImageTransform.Microsoft.gradient(start-colourStr=  '#{$start-colour}', end-colourStr='#{$end-colour}');
+}
+
+//Font Family Set
+@mixin heeboRegular {
+  font-family: 'Heebo', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+@mixin heeboBold {
+  font-family: 'Heebo', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+}
+@mixin montserratRegular {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+}
+@mixin monteserratBold {
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+}
+
+// Flex >>> column / center mixin
+@mixin flexColumn {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+@mixin flexRow {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+}
+
+//Page Styles
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+//Welcome Header
+.heroHeader {
+  @include flexColumn;
+  justify-content: flex-start;
+  height: 600px;
+  background: #0F2E6F url("../img/hero-min.jpg") center top /cover no-repeat;
+}
+
+.navCtn {
+  position: relative;
+  align-self: flex-start;
+  padding: 1em;
+  width: 100%;
+}
+
+.navItem {
+  display: inline-block;
+  padding-left: 40px;
+
+  & a {
+    @include heeboRegular;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.welcomeCtn {
+  @include flexColumn;
+  margin-top: 56px;
+
+  & h3 {
+    @include monteserratBold;
+    color: #fff;
+    font-size: 1.375em;
+    text-transform: uppercase;
+    letter-spacing: 2.6px;
+  }
+
+  & h1 {
+    @include monteserratBold;
+    color: #fff;
+    font-size: 4.75em;
+    text-transform: uppercase;
+    letter-spacing: 10.6px;
+    margin: 15px 0;
+    padding: 10px 0;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+  }
+
+  & .crownWhite {
+    margin: 0 0 20px;
+  }
+}
+
+//Book Section
+.bookSection {
+  @include flexColumn;
+  width: 100%;
+  height: auto;
+}
+
+.bookCtn {
+  position: relative;
+  top: -150px;
+  background: #fff;
+  border-radius: 7px;
+  width: 80vw;
+  height: 460px;
+  box-shadow: 0 -40px 46px 0 rgba(0,0,0,0.33);
+  -webkit-box-shadow: 0 -40px 46px 0 rgba(0,0,0,0.33);
+  -moz-box-shadow: 0 -40px 46px 0 rgba(0,0,0,0.33);
+
+  & header {
+    @include flexColumn;
+    justify-content: center;
+    width: 100%;
+    height: 150px;
+    text-align: center;
+
+    & h2 {
+      @include montserratRegular;
+      color: #000;
+      font-size: 1.375em;
+      letter-spacing: 2.5px;
+      margin: 0 auto;
+    }
+  }
+}
+
+.bookWrapper {
+  @include flexRow;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6em;
+}
+
+.dateField {
+  @include flexColumn;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  & h2 {
+    @include heeboRegular;
+    color: $darkGray;
+    font-size: 1.375em;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    text-align: left;
+  }
+
+  & h3 {
+    @include heeboRegular;
+    color: $lightGray;
+    font-size: 1.25em;
+    letter-spacing: 1.36px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+}
+
+.searchHotels {
+  @include heeboBold;
+  font-size: 0.937em;
+  color: $orange;
+  letter-spacing: 1px;
+  width: 180px;
+  height: 50px;
+  border-radius: 100px;
+  border: 2px solid $orange;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
+  }
+
+  &:hover {
+    background: $orange;
+    color: #fff;
+  }
+
+  &:active {
+    background: darken($orange, 10%);
+  }
+}
+
+.resultsSection {
+  @include flexColumn;
+  width: 100%;
+  padding: 2em;
+
+  & h1 {
+    @include montserratRegular;
+    font-size: 1.375em;
+    line-height: 1.687em;
+    letter-spacing: 2,5px;
+    margin-bottom: 70px;
+  }
+}
+
+// Filter Area
+.filterCtn {
+  height: 100%;
+
+  & .ui-widget.ui-widget-content {
+    border: 1px solid $orange;
+  }
+
+  & h2 {
+    @include montserratRegular;
+    font-size: 1.375em;
+    line-height: 1.6875em;
+    letter-spacing: 2.2px;
+    margin-bottom: 0.325em;
+  }
+
+  & small {
+    @include heeboRegular;
+    font-size: 0.8em;
+    line-height: 1.125em;
+    color: $lightGray;
+  }
+}
+
+#sliderRange {
+  position: relative;
+  display: block;
+  height: 3px;
+  background: $orange;
+  margin: 1.2em 0 2em;
+
+  & .ui-widget-header {
+    background: transparent;
+  }
+
+  & span {
+    top: -10px;
+    border-radius: 50%;
+    outline: none;
+    line-height: 50px;
+    background: #fff;
+    border: 4px solid $orange;
+    cursor: pointer;
+
+    &:active {
+      background: $orange;
+    }
+  }
+}
+
+.priceCtn {
+  @include flexRow;
+  justify-content: space-between;
+
+  & p {
+    display: block;
+    margin: 0;
+    padding: 0;
+    @include heeboRegular;
+    font-size: 0.875em;
+    color: $lightGray;
+  }
+
+  & .min {
+    position: relative;
+  }
+
+  & .max {
+    text-align: right;
+    position: relative;
+  }
+
+  #highPrice,
+  & #lowPrice {
+    @include heeboBold;
+    font-size: 1.175em;
+    color: rgba($orange, .8);
+    letter-spacing: 2px;
+    width: 150px;
+    border: none;
+    background: transparent;
+  }
+
+  & #lowPrice {
+    position: relative;
+  }
+
+  & #highPrice {
+    position: relative;
+    text-align: right;
+  }
+}
+
+// Filter by stars
+
+.starsCtn {
+  margin-top: 1.875em;
+
+  & hr {
+    border: 1px solid #E3E3E3;
+    margin-bottom: 0.9375em;
+  }
+
+  & small {
+    display: block;
+    margin-bottom: 0.4230em;
+  }
+}
+// End Filter Area
+
+//Hotel Info List
+
+.hotelInfoWrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 8fr 1fr;
+  align-items: center;
+  border-radius: 5px;
+  margin-bottom: 1.875em;
+  padding: 2em 0;
+  background: #fff;
+  box-shadow: 0 4px 17px 0 rgba(0,0,0,0.22);
+  -webkit-box-shadow: 0 4px 17px 0 rgba(0,0,0,0.22);
+  -moz-box-shadow: 0 4px 17px 0 rgba(0,0,0,0.22);
+}
+
+.imgCtn {
+  @include flexColumn;
+  flex-flow: row;
+  align-items: center;
+  position: relative;
+  height: 238px;
+  width: 238px;
+
+  & img {
+    display: block;
+    position: absolute;
+    left: -35px;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 12px 0 rgba(0,0,0,0.47);
+    -webkit-box-shadow: 0 0 12px 0 rgba(0,0,0,0.47);
+    -moz-box-shadow: 0 0 12px 0 rgba(0,0,0,0.47);
+    z-index: 99;
+  }
+}
+
+//Hotel Star Score - Stars based on data rate from json
+
+.starRating-2 {
+  font-family: 'FontAwesome';
+  font-size: 1em;
+  color: $star;
+  line-height: 1em;
+
+  &:after {
+    content: '\f005';
+    margin-right: 2px;
+  }
+}
+
+.starRating-3 {
+  font-family: 'FontAwesome';
+  font-size: 1em;
+  line-height: 1em;
+  color: $star;
+
+  &:after {
+    content: '\f005 \f005';
+    margin-right: 2px;
+  }
+}
+
+.starRating-4 {
+  font-family: 'FontAwesome';
+  color: $star;
+  line-height: 1em;
+
+  &:after {
+    content: '\f005 \f005 \f005';
+    margin-right: 2px;
+  }
+}
+
+.starRating-5 {
+  font-family: 'FontAwesome';
+  font-size: 1em;
+  color: $star;
+  line-height: 1em;
+
+  &:after {
+    content: '\f005 \f005 \f005 \f005';
+    margin-right: 2px;
+  }
+}
+
+.hotelInfo {
+  padding: 0 1em 0 0;
+
+  & ul {
+    width: 100px;
+    margin-bottom: 20px;
+  }
+
+  & li {
+    display: inline-block;
+    list-style: none;
+
+    & span {
+      color: #F9B349;
+    }
+  }
+
+  & h1 {
+    @include heeboBold;
+    font-size: 1em;
+    color: $orange;
+    line-height: 1.625em;
+    letter-spacing: 1.82px;
+    overflow-wrap: wrap;
+    word-wrap: break-word;
+    text-transform: uppercase;
+    margin: 15px 0;
+  }
+
+  & p {
+    @include montserratRegular;
+    font-size: 0.9375em;
+    color: $lightGray;
+    line-height: 1.4em;
+    overflow-wrap: wrap;
+    word-wrap: break-word;
+    margin-bottom: 16px;
+  }
+
+  //Buttons inside hotel detail
+
+  & .bookNow {
+    @include heeboBold;
+    font-size: 0.937em;
+    color: $orange;
+    letter-spacing: 1px;
+    width: 180px;
+    height: 50px;
+    border-radius: 100px;
+    border: 2px solid $orange;
+    margin-right: 1em;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background: $orange;
+      color: #fff;
+    }
+
+    &:active {
+      background: darken($orange, 10%);
+    }
+  }
+
+  & .priceHistory {
+    @include heeboBold;
+    font-size: 0.937em;
+    color: $green;
+    letter-spacing: 1px;
+    width: 180px;
+    height: 50px;
+    border-radius: 100px;
+    border: 2px solid $green;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+
+    &:hover {
+      background: $green;
+      color: #fff;
+    }
+
+    &:active {
+      background: darken($green, 10%);
+    }
+  }
+}
+
+.hotelPrice {
+  @include flexColumn;
+  padding: 1em;
+  height: 80%;
+  border-left: 1px solid #D9D9D9;
+
+  & small {
+    display: block;
+    width: auto;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.6em;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    line-height: 1.2em;
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: #B2B0C0;
+  }
+
+  & {
+    .price {
+      @include monteserratBold;
+      font-size: 1.45em;
+      letter-spacing: 1.2px;
+      color: $green;
+    }
+  }
+}
+
+// Price history modal
+
+.modalCtn {
+  @include flexColumn;
+  display: none;
+  position: absolute;
+  padding: 4em 2em 4em 4em;
+  height: 100%;
+  width: 80%;
+  right: 0;
+  border-radius: 0 5px 5px 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.modalWrapper {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  padding-left: 5%;
+}
+
+.modalTextWrapper {
+  @include flexRow;
+  justify-content: space-between;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  & h2 {
+    @include heeboBold;
+    font-size: 1em;
+    letter-spacing: 1.82px;
+    text-transform: uppercase;
+    color: $orange;
+  }
+
+  & .backDescription {
+    @include heeboRegular;
+    display: block;
+    position: relative;
+    color: $darkGray;
+    font-size: 0.75em;
+    letter-spacing: 1.36px;
+    padding: 1px;
+    cursor: pointer;
+    user-select: none;
+
+    &:before {
+      content: '';
+      position: absolute;
+      background: url("../img/back-description.svg") 0 0 no-repeat;
+      width: 26px;
+      height: 14px;
+      top: 3px;
+      left: -30px;
+      -webkit-transition: all 0.25s ease-out;
+      -moz-transition: all 0.25s ease-out;
+      -o-transition: all 0.25s ease-out;
+      -ms-transition: all 0.25s ease-out;
+      transition: all 0.25s ease-out;
+    }
+
+    &:hover {
+      color: #FBB940;
+    }
+
+    &:hover:before {
+      left: -40px;
+    }
+
+    &:active {
+      color: $darkGray;
+    }
+
+    &:after {
+      content: 'Back to description';
+    }
+  }
+}
+
+.chartWrapper {
+  @include flexRow;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.priceBar {
+  @include heeboRegular;
+  position: relative;
+  font-size: 0.9375;
+  font-weight: normal;
+  letter-spacing: 1.7px;
+  color: #fff;
+  width: 30px;
+  border-radius: 3px 3px 0 0;
+  background: #f98100;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #f98100 0%, #ee6f48 80%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #f98100 0%,#ee6f48 80%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #f98100 0%,#ee6f48 80%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: $darkOrange;
+  }
+}
+
+//Setting tooltip for price bar
+
+[data-tooltip] {
+  position: relative;
+  cursor: pointer;
+}
+
+[data-tooltip]:after,
+[data-tooltip]:before {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -o-transition: all 0.25s ease;
+  -ms-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  z-index: 9999;
+}
+
+[data-tooltip]:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-bottom: 5px;
+  margin-left: -35px;
+  padding: 6px 10px;
+  width: 70px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.375;
+  color: #fff;
+  background-color: #484848;
+  z-index: 9999;
+}
+
+[data-tooltip]:after {
+  content: " ";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  border-top: 5px solid #484848;
+  border-top: 5px solid #484848;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  font-size: 0;
+  line-height: 0;
+}
+
+[data-tooltip]:hover:after,
+[data-tooltip]:hover:before {
+  bottom: 110%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.months {
+  @include heeboRegular;
+  font-size: 0.8em;
+  color: $lightGray;
+  letter-spacing: 1.45px;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 2px solid #D9D9D9;
+  width: 100%;
+}
+
+footer {
+  @include flexColumn;
+  height: 160px;
+  box-shadow: 0 -2px 20px 0 rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 -2px 20px 0 rgba(0,0,0,0.23);
+  -moz-box-shadow: 0 -2px 20px 0 rgba(0,0,0,0.23);
+
+  & ul {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    margin-bottom: 30px;
+  }
+
+  & li {
+    display: inline-block;
+    list-style: none;
+
+    & svg {
+      fill: $orange;
+      cursor: pointer;
+
+      &:hover {
+        fill: $darkOrange;
+      }
+    }
+  }
+
+  & small {
+    @include heeboRegular;
+    font-size: 0.75em;
+    color: $lightGray;
+  }
+}
+
+.sorryModal {
+  position: fixed;
+  top: -100%;
+  width: 100%;
+  padding: 1em;
+  text-align: center;
+  color: #fff;
+  background: $orange;
+  opacity: 0;
+  z-index: 9999;
+
+  & span {
+    font-size: 3em;
+  }
+
+  & p {
+    @include heeboRegular;
+    font-size: 1em;
+    margin: 10px 0;
+  }
+}
+
+
+/////////////// Media queries ///////////////////////
+
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen and (min-device-width: 1600px)
+and (max-device-width: 1920px)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+  .resultsCtn {
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-gap: 5em;
+  }
+
+  .bookCtn {
+    width: 60vw;
+  }
+  /*Custom styles of pick day*/
+  .flatpickr-day.selected.endRange.endRange {
+    border-radius: 0 50% 50% 0;
+  }
+
+  .flatpickr-day.selected.endRange.inRange p {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange.inRange,
+  .flatpickr-day.selected.startRange.endRange {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange p {
+    margin: 0 auto;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: #fff;
+    color: rgb(121, 189, 26);
+    line-height: 35px;
+    border: 2px solid rgb(121, 189, 26);
+    padding: 0;
+  }
+}
+/* Medium Screens / Laptops */
+@media screen and (min-device-width: 1200px)
+and (max-device-width: 1600px)
+and (-webkit-min-device-pixel-ratio: 1) {
+
+  .resultsCtn {
+    display: grid;
+    grid-template-columns: 2fr 6fr;
+    grid-gap: 5em;
+  }
+  /*Custom styles of pick day*/
+  .flatpickr-day.selected.endRange.endRange {
+    border-radius: 0 50% 50% 0;
+  }
+
+  .flatpickr-day.selected.endRange.inRange p {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange.inRange,
+  .flatpickr-day.selected.startRange.endRange {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange p {
+    margin: 0 auto;
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background: #fff;
+    color: rgb(121, 189, 26);
+    line-height: 35px;
+    border: 2px solid rgb(121, 189, 26);
+    padding: 0;
+  }
+}
+/* Tablets / iPads */
+@media only screen and (min-device-width: 768px)
+and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+  .navCtn {
+    text-align: center;
+
+    & li {
+      margin-right: 40px;
+      padding: 0;
+    }
+  }
+
+  .bookCtn {
+    width: 90vw;
+    padding: 0;
+  }
+
+  .bookWrapper {
+    padding: 0 3em;
+  }
+  $dayWidth: 50px;
+  $width: $dayWidth * 7;
+
+  .flatpickr-wrapper {
+    position: relative;
+  }
+
+  .flatpickr-calendar {
+    width: $width;
+  }
+
+  .dayContainer {
+    width: $width;
+    min-width: $width;
+    max-width: $width;
+  }
+
+  .flatpickr-days {
+    width: $width;
+  }
+
+  .flatpickr-day {
+    max-width: $dayWidth;
+    height: $dayWidth;
+    line-height: $dayWidth;
+    font-size: 1.2em;
+  }
+
+  .flatpickr-month {
+    height: 60px;
+  }
+
+  .flatpickr-current-month {
+    font-size: 1.2em;
+    line-height: 1.4em;
+  }
+
+  .flatpickr-next-month svg,
+  .flatpickr-prev-month svg {
+    width: 24px;
+  }
+
+  .flatpickr-calendar.inline,
+  .flatpickr-calendar.open {
+    max-height: 768px;
+  }
+
+  .flatpickr-weekdays {
+    height: 40px;
+  }
+
+  span.flatpickr-weekday {
+    font-size: 1em;
+  }
+
+  .dateField {
+    width: 100%;
+    height: 420px;
+
+    & h2 {
+      font-size: 1.6em;
+    }
+
+    & h3 {
+      font-size: 1.5em;
+    }
+  }
+
+  .searchHotels {
+    position: relative;
+    bottom: 0;
+    width: 70%;
+    height: 76px;
+    font-size: 1.2em;
+  }
+
+  .resultsSection {
+    padding: 4em 3em;
+
+    & > h1 {
+      font-size: 2em;
+      text-align: center;
+    }
+  }
+
+  .resultsCtn {
+    width: 90vw;
+  }
+
+  .filterCtn {
+    padding: 0 2em;
+    font-size: 1.2em;
+  }
+
+  .priceCtn p {
+    margin-top: 15px;
+  }
+
+  #sliderRange {
+    margin: 2em 0 1em;
+
+    & span {
+      width: 30px;
+      height: 30px;
+      top: -15px;
+    }
+  }
+
+  .starsCtn {
+    margin-top: 1em;
+  }
+
+  .star {
+    background: url('../img/star-outline.svg') center center /cover no-repeat;
+    display: block;
+    width: 40px;
+    height: 36px;
+    float: left;
+    cursor: pointer;
+    zoom: 1;
+  }
+
+  .fullStar {
+    background: url('../img/star-filled.svg') center center /cover no-repeat;
+  }
+
+  .stars {
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .hotelInfoWrapper {
+    padding: 2em 0;
+  }
+
+  .hotelInfo {
+    & h1 {
+      font-size: 1.4em;
+    }
+
+    & p {
+      font-size: 1em;
+      margin-bottom: 25px;
+    }
+  }
+
+  .hotelPrice {
+    height: 90%;
+  }
+
+  .modalCtn {
+    padding: 3em 1em 4em 26.6%;
+    border-radius: 5px;
+    width: 100%;
+  }
+
+  .modalWrapper {
+    padding: 0;
+    width: 95%;
+  }
+
+  .modalTextWrapper {
+    & h2 {
+      font-size: 1.4em;
+    }
+
+    & .backDescription {
+      align-self: flex-end;
+      font-size: 1em;
+
+      &:before {
+        width: 36px;
+        height: 24px;
+        left: -45px;
+      }
+    }
+  }
+
+  .sorryModal {
+    position: fixed;
+    top: -100%;
+    width: 100%;
+    padding: 4em 2em;
+    text-align: center;
+    color: #fff;
+    background: rgba($orange, 0.97);
+    opacity: 0;
+    z-index: 9999;
+
+    & span {
+      font-size: 4em;
+    }
+
+    & p {
+      @include heeboRegular;
+      font-size: 1.4em;
+      margin: 1em 0;
+    }
+  }
+
+  footer {
+    height: 200px;
+    padding: 0 3em;
+    text-align: center;
+
+    & ul {
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+      margin-bottom: 1.4em;
+    }
+
+    & li {
+      & svg {
+        width: 48px;
+        height: 48px;
+      }
+    }
+
+    & small {
+      @include heeboRegular;
+      font-size: 1em;
+    }
+  }
+  /*Custom styles of pick day*/
+  .flatpickr-day.selected.endRange p {
+    margin: 0 auto;
+    text-align: center;
+    margin-left: 1px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #fff;
+    color: rgb(121, 189, 26);
+    line-height: 46px;
+    border: 2px solid rgb(121, 189, 26);
+  }
+}
+/* Smartphones */
+@media only screen and (min-device-width: 320px)
+and (max-device-width: 568px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+  .heroHeader {
+    @include flexColumn;
+    justify-content: flex-start;
+    height: 1024px;
+    background: #0F2E6F url("../img/hero-min.jpg") center center /cover no-repeat;
+  }
+
+  .welcomeCtn {
+    @include flexColumn;
+    margin-top: 15%;
+
+    & h3 {
+      @include monteserratBold;
+      color: #fff;
+      font-size: 3.2em;
+      text-transform: uppercase;
+      letter-spacing: 2.6px;
+    }
+
+    & h1 {
+      @include monteserratBold;
+      color: #fff;
+      font-size: 8.2em;
+      text-transform: uppercase;
+      letter-spacing: 10.6px;
+      margin: 15px 0;
+      padding: 10px 0;
+      border-top: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+    }
+
+    & .crownWhite {
+      margin: 0 0 20px;
+      width: 90px;
+    }
+  }
+
+  .navCtn {
+    align-self: flex-start;
+    text-align: center;
+
+    & li {
+      margin-right: 40px;
+      padding: 0;
+    }
+  }
+
+  .navItem {
+    margin-top: 24px;
+
+    & a {
+      @include heeboRegular;
+      font-size: 2em;
+      color: #fff;
+      text-decoration: none;
+
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+
+  .bookCtn {
+    width: 100vw;
+    padding: 1em;
+    position: relative;
+    height: auto;
+
+    & header {
+      padding: 2em;
+      margin: 5em 0;
+    }
+
+    & header h2 {
+      display: block;
+      position: relative;
+      font-size: 4.2em;
+    }
+  }
+
+  .bookSection {
+    position: relative;
+    height: auto;
+  }
+
+  .bookWrapper {
+    @include flexColumn;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .resultsSection {
+    & > h1 {
+      font-size: 2em;
+      text-align: center;
+    }
+  }
+
+  .dateField {
+    width: 100vw;
+    height: 800px;
+    padding: 2em 4em;
+    position: relative;
+
+    & h2 {
+      font-size: 3.4em;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      text-align: left;
+    }
+
+    & h3 {
+      @include heeboRegular;
+      color: $lightGray;
+      font-size: 3em;
+      letter-spacing: 1.36px;
+      margin-bottom: 40px;
+      text-align: left;
+    }
+  }
+
+  .calendarField {
+    width: 100vw;
+    height: 1180px;
+    position: relative;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  $dayWidth: 132px;
+  $width: $dayWidth * 7;
+
+  .flatpickr-wrapper {
+    position: relative;
+  }
+
+  .flatpickr-calendar {
+    width: $width;
+  }
+
+  .dayContainer {
+    width: $width;
+    min-width: $width;
+    max-width: $width;
+  }
+
+  .flatpickr-days {
+    width: $width;
+  }
+
+  .flatpickr-day {
+    max-width: $dayWidth;
+    height: $dayWidth;
+    line-height: $dayWidth;
+    font-size: 2.7em;
+  }
+
+  .flatpickr-month {
+    height: 160px;
+  }
+
+  .flatpickr-current-month {
+    font-size: 3em;
+    line-height: 2.2em;
+  }
+
+  .flatpickr-next-month svg,
+  .flatpickr-prev-month svg {
+    width: 64px;
+    margin-top: 32px;
+  }
+
+  .flatpickr-calendar.inline,
+  .flatpickr-calendar.open {
+    max-height: 1080px;
+  }
+
+  .flatpickr-weekdays {
+    height: 80px;
+  }
+
+  span.flatpickr-weekday {
+    font-size: 2.2em;
+  }
+  /*Custom styles of pick day*/
+  .flatpickr-day.selected.startRange {
+    border-radius: 50% 0 0 50%;
+  }
+
+  .flatpickr-day.selected.endRange.endRange {
+    border-radius: 0 50% 50% 0;
+  }
+
+  .flatpickr-day.selected.endRange.inRange p {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange.inRange,
+  .flatpickr-day.selected.startRange.endRange {
+    background: rgb(121, 189, 26);
+    color: #fff;
+    border-radius: 50%;
+  }
+
+  .flatpickr-day.selected.endRange p {
+    margin: 0 auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fff;
+    color: rgb(121, 189, 26);
+    line-height: 120px;
+    border: 6px solid rgb(121, 189, 26);
+    padding: 0;
+  }
+
+  .flatpickr-innerContainer,
+  .flatpickr-month {
+    width: auto;
+  }
+
+  .searchHotels {
+    position: relative;
+    top: 40px;
+    width: 70%;
+    height: 20%;
+    font-size: 3em;
+    margin: 0 auto;
+  }
+
+  .resultsSection {
+    padding: 5em 3em;
+
+    & > h1 {
+      font-size: 3em;
+      text-align: center;
+    }
+  }
+
+  .resultsCtn {
+    width: 90vw;
+  }
+
+  .filterCtn {
+    padding: 1em;
+    font-size: 2.8em;
+  }
+
+  .priceCtn p {
+    margin-top: 15px;
+  }
+
+  #sliderRange {
+    margin: 2em 0 1em;
+
+    & span {
+      width: 54px;
+      height: 54px;
+      top: -27px;
+    }
+  }
+
+  #highPrice,
+  & #lowPrice {
+    font-size: 1.175em;
+    width: 300px;
+  }
+
+  .starsCtn {
+    margin-top: 0.5em;
+    height: 250px;
+  }
+
+  .star {
+    background: url('../img/star-outline.svg') center center /cover no-repeat;
+    display: block;
+    width: 80px;
+    height: 76px;
+    margin-right: 15px;
+    float: left;
+    cursor: pointer;
+    zoom: 1;
+  }
+
+  .fullStar {
+    background: url('../img/star-filled.svg') center center /cover no-repeat;
+  }
+
+  .stars {
+    height: 100px;
+    overflow: hidden;
+  }
+
+  .hotelInfoWrapper {
+    @include flexColumn;
+    position: relative;
+    padding: 2em;
+    height: auto;
+  }
+
+  .imgCtn {
+    width: 85vw;
+    height: auto;
+    z-index: 9999;
+
+    & img {
+      display: block;
+      position: relative;
+      left: 0;
+      width: 100%;
+      max-width: 100%;
+      margin-bottom: 2em;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  }
+
+  .starRating-2,
+  .starRating-3,
+  .starRating-4,
+  .starRating-5 {
+    font-size: 4em;
+  }
+
+  .hotelInfo {
+    @include flexColumn;
+    align-items: center;
+    justify-content: center;
+    padding: 2em 1em;
+
+    & .hotelStars {
+      align-self: baseline;
+    }
+
+    & h1 {
+      font-size: 4em;
+      line-height: 1.3em;
+      margin: 1em 0;
+      text-align: center;
+    }
+
+    & p {
+      font-size: 2.4em;
+      line-height: 1.6em;
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    & .bookNow,
+    .priceHistory {
+      margin: 0 auto 1em;
+      width: 580px;
+      height: 140px;
+      font-size: 3em;
+    }
+  }
+
+  .hotelPrice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 400px;
+    padding: 2em 2em;
+    height: auto;
+    background: $green;
+    border: none;
+    z-index: 9999;
+
+    & small {
+      display: block;
+      font-size: 2em;
+      text-align: center;
+      color: #fff;
+    }
+
+    & {
+      .price {
+        font-size: 3.6em;
+        color: #fff;
+      }
+    }
+  }
+
+  .modalCtn {
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    width: 90vw;
+    height: 60%;
+    z-index: 9998;
+  }
+
+  .modalWrapper {
+    margin: 0 auto;
+    padding: 3em 1em 8em 0;
+  }
+
+  .modalTextWrapper {
+    flex-direction: column-reverse;
+    justify-content: space-around;
+    padding: 2em;
+
+    & h2 {
+      position: relative;
+      top: 10px;
+      font-size: 6.6em;
+      margin-right: 2em;
+      line-height: 1em;
+    }
+
+    & .backDescription {
+      align-self: flex-end;
+      color: #fff;
+      border: none;
+      background: transparent;
+
+      &:before {
+        width: 60px;
+        height: 48px;
+        top: 0;
+      }
+
+      &:after {
+        content: '';
+      }
+    }
+  }
+
+  .priceBar {
+    width: 80px;
+    border-radius: 14px 14px 0 0;
+  }
+
+  [data-tooltip]:before {
+    font-size: 2.6em;
+    bottom: 100%;
+    left: 50%;
+    padding: 6px 12px;
+    margin-bottom: 5px;
+    margin-left: -80px;
+    width: 160px;
+    letter-spacing: 0;
+    z-index: 9999;
+  }
+
+  [data-tooltip]:hover:after,
+  [data-tooltip]:hover:before {
+    bottom: calc(100% + 35px);
+  }
+
+  [data-tooltip]:after {
+    border-top: 25px solid #484848;
+    border-top: 25px solid #484848;
+    top: -30px;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
+
+  [data-tooltip]:hover:after {
+    top: -40px;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+  }
+
+  .months {
+    font-size: 2em;
+    text-align: center;
+    justify-content: space-around;
+  }
+
+  .sorryModal {
+    position: fixed;
+    top: -100%;
+    width: 100%;
+    padding: 6em 2em;
+    text-align: center;
+    color: #fff;
+    background: rgba($orange, 0.97);
+    opacity: 0;
+    z-index: 9999;
+
+    & span {
+      font-size: 6em;
+    }
+
+    & p {
+      @include heeboRegular;
+      font-size: 3em;
+      margin: 1em 0;
+    }
+  }
+
+  footer {
+    height: 370px;
+    padding: 0 2em;
+    text-align: center;
+
+    & ul {
+      display: flex;
+      justify-content: space-between;
+      width: 450px;
+      margin-bottom: 3em;
+    }
+
+    & li {
+      & svg {
+        width: 96px;
+        height: 96px;
+      }
+    }
+
+    & small {
+      @include heeboRegular;
+      font-size: 1.6em;
+    }
+  }
+}

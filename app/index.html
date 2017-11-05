@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Hotel Reservation | Charlotte - The Queen City</title>
+    <meta name="description" content="Charlotte Hotel Reservations. Book your hotel here aways with the best prices!">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="assets/css/flatpickr-min.css">
+    <link rel="stylesheet" href="assets/css/rating-min.css">
+    <link rel="stylesheet" href="assets/css/styles-min.css">
+    <!--[if lt IE 9]>
+         <script src = "http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+       <![endif]-->
+  </head>
+  <body>
+    <header class="heroHeader">
+      <nav class="navCtn">
+        <ul class="navList">
+          <li class="navItem"><a href="#">The Queen City</a></li>
+          <li class="navItem"><a href="#">My Reservations</a></li>
+          <li class="navItem"><a href="#">Guide</a></li>
+        </ul>
+      </nav>
+      <div class="welcomeCtn">
+        <img class="crownWhite" src="assets/img/crown-white.png">
+        <h3>Welcome to<h3>
+        <h1>charlotte</h1>
+        <h3>The Queen City</h3>
+      </div>
+    </header>
+    <section class="bookSection">
+      <div class="bookCtn">
+        <header>
+          <h2>Select the dates to stay in Charlotte</h2></header>
+        <section class="bookWrapper">
+          <article class="dateField">
+              <h2>Check-In</h2>
+              <h3 id="checkIn">Choose a date</h3>
+              <h2>Check-Out</h2>
+              <h3 id="checkOut">Choose a date</h3>
+              <button type="button" class="searchHotels">Search hotels</button>
+          </article>
+          <article class="calendarField">
+              <input id="calendarContainer" data-date-format="l, F j, Y" style="display: none;">
+          </article>
+        </section>
+      </div>
+    </section>
+    <section class="resultsSection" style="display:none;">
+      <h1>Best choices between <b><span id="dateStart"></span></b> and <b><span id="dateEnd">:</span></b></h1>
+      <div class="resultsCtn">
+          <article class="filterCtn">
+            <h2>Filters</h2>
+            <small>Average price per night:</small>
+            <div id="sliderRange"></div>
+            <div class="priceCtn">
+              <div>
+                <p class="min">Min</p>
+                <input type="text" id="lowPrice" value="$100" readonly>
+              </div>
+              <div>
+                <p class="max">Max</p>
+                <input type="text" id="highPrice" value="$600" readonly></div>
+              </div>
+            <div class="starsCtn">
+              <hr>
+              <small>Stars</small>
+              <div class="starRating">
+                <input type="radio" name="ratingHotel" class="rating" value="1" />
+                <input type="radio" name="ratingHotel" class="rating" value="2" />
+                <input type="radio" name="ratingHotel" class="rating" value="3" />
+                <input type="radio" name="ratingHotel" class="rating" value="4" />
+                <input type="radio" name="ratingHotel" class="rating" value="5" />
+              </div>
+            </div>
+          </article>
+        <!-- Start listing hotels -->
+        <div id="hotelList"></div>
+      </div>
+    </section>
+    <footer>
+      <ul>
+        <li>
+          <svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <desc>Facebook</desc>
+              <g id="facebook">
+                <path d="M17,0 C7.6075,0 0,7.6075 0,17 C0,26.3925 7.6075,34 17,34 C26.3925,34 34,26.3925 34,17 C34,7.6075 26.3925,0 17,0 Z M21.2925,11.6875 L19.0825,11.6875 C18.4875,11.6875 18.0625,12.1975 18.0625,12.835 L18.0625,13.8125 L21.2075,13.8125 L20.6975,17 L18.0625,17 L18.0625,25.5425 L14.8325,25.5425 L14.8325,17 L12.7075,17 L12.7075,13.8125 L14.8325,13.8125 L14.8325,12.1975 L14.8325,12.1975 C14.875,10.3275 15.5125,8.585 18.6575,8.4575 L18.6575,8.4575 L21.25,8.4575 L21.25,11.6875 L21.2925,11.6875 Z" id="Shape"></path>
+              </g>
+          </svg>
+        </li>
+        <li>
+          <svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <desc>Twitter</desc>
+            <g id="twitter">
+              <path d="M17,0 C7.6075,0 0,7.6075 0,17 C0,26.3925 7.6075,34 17,34 C26.3925,34 34,26.3925 34,17 C34,7.6075 26.3925,0 17,0 Z M25.7975,13.6 C25.7975,13.77 25.7975,13.9825 25.7975,14.1525 C25.7975,19.8475 21.4625,26.435 13.515,26.435 C11.0925,26.435 8.7975,25.7125 6.885,24.48 C7.225,24.5225 7.565,24.5225 7.905,24.5225 C9.945,24.5225 11.7725,23.8425 13.26,22.695 C11.39,22.6525 9.775,21.42 9.2225,19.6775 C9.4775,19.72 9.775,19.7625 10.03,19.7625 C10.4125,19.7625 10.795,19.72 11.1775,19.5925 C9.2225,19.21 7.735,17.4675 7.735,15.3425 C7.735,15.3425 7.735,15.3 7.735,15.3 C8.33,15.64 8.9675,15.81 9.69,15.8525 C8.5425,15.0875 7.7775,13.77 7.7775,12.24 C7.7775,11.4325 7.99,10.71 8.3725,10.0725 C10.4975,12.665 13.685,14.4075 17.255,14.5775 C17.17,14.28 17.1275,13.94 17.1275,13.6 C17.1275,11.22 19.04,9.265 21.4625,9.265 C22.695,9.265 23.8425,9.775 24.6075,10.625 C25.585,10.4125 26.52,10.0725 27.3275,9.5625 C26.9875,10.5825 26.3075,11.4325 25.415,11.9425 C26.3075,11.8575 27.115,11.6025 27.88,11.2625 C27.37,12.1975 26.6475,12.9625 25.7975,13.6 Z" id="Shape"></path>
+            </g>
+          </svg>
+        </li>
+        <li>
+          <svg width="34px" height="34px" viewBox="0 0 34 34" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <desc>Instagram</desc>
+            <g id="instagram">
+              <circle id="Oval" cx="17" cy="17" r="2.55"></circle>
+              <path d="M21.25,10.3275 L12.75,10.3275 C11.39,10.3275 10.285,11.4325 10.285,12.7925 L10.285,21.25 C10.285,22.61 11.39,23.715 12.75,23.715 L21.25,23.715 C22.61,23.715 23.715,22.61 23.715,21.25 L23.715,12.75 C23.6725,11.39 22.61,10.3275 21.25,10.3275 Z M17,21.42 C14.5775,21.42 12.58,19.4225 12.58,17 C12.58,14.5775 14.5775,12.58 17,12.58 C19.4225,12.58 21.42,14.5775 21.42,17 C21.42,19.4225 19.4225,21.42 17,21.42 Z M21.5475,13.515 C20.9525,13.515 20.485,13.0475 20.485,12.4525 C20.485,11.8575 20.9525,11.39 21.5475,11.39 C22.1425,11.39 22.61,11.8575 22.61,12.4525 C22.61,13.0475 22.1425,13.515 21.5475,13.515 Z" id="Shape"></path>
+              <path d="M17,0 C7.6075,0 0,7.6075 0,17 C0,26.3925 7.6075,34 17,34 C26.3925,34 34,26.3925 34,17 C34,7.6075 26.3925,0 17,0 Z M25.6275,21.2925 C25.6275,23.6725 23.6725,25.6275 21.2925,25.6275 L12.7075,25.6275 C10.3275,25.6275 8.3725,23.6725 8.3725,21.2925 L8.3725,12.7075 C8.3725,10.3275 10.3275,8.3725 12.7075,8.3725 L21.25,8.3725 C23.63,8.3725 25.585,10.3275 25.585,12.7075 L25.585,21.2925 L25.6275,21.2925 Z" id="Shape"></path>
+            </g>
+          </svg>
+        </li>
+      </ul>
+      <small>© 2004-2017 Visit Charlotte. All Rights Reserved. 500 S. College Street, Suite 300, Charlotte, NC 28202</small>
+    </footer>
+    <div class="sorryModal">
+
+      <span class="fa fa-frown-o"></span>
+      <p></p>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="assets/js/flatpickr/flatpickr.min.js"></script>
+    <script src="assets/js/star-rating/rating-min.js"></script>
+    <script src="assets/js/functions-min.js"></script>
+  </body>
+</html>
