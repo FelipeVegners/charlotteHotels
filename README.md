@@ -27,8 +27,11 @@ Criei um método (linha 79 a 83 functions.js) para ordenar os resultados por pre
 
 Na classificação por estrelas, caso o método não encontre nos resultados um hotel com tal classificação, dispara uma mensagem para o usuário. Nesse teste, não há hotéis com 1 estrela, então ao clicar na primeira estrela o modal aparecerá. Porém o método funciona com todos os resultados, caso o JSON seja atualizado e traga um hotel com 1 estrela.
 
+<<<<<<< HEAD
 Criei um método também para caso o usuário modificar as datas, não carregue novamente os mesmos resultados. O método retira os atuais e mostra um novo resultado de acordo com as novas datas.
 
+=======
+>>>>>>> 3230e22ce89eccc07c199975131e282293fcd022
 Dependências:
 
 O app não tem nenhuma dependência para rodar além de estar online para trazer os arquivos dos CDN's.
