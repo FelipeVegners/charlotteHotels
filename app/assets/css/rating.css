@@ -1,0 +1,33 @@
+
+/*
+
+Styles for Star Rating Filter
+
+*/
+
+.star {
+  background: url('../img/star-outline.svg') center center /cover no-repeat;
+  display: block;
+  width: 20px;
+  height: 16px;
+  float: left;
+  cursor: pointer;
+  zoom: 1;
+}
+
+.fullStar {
+  background: url('../img/star-filled.svg') center center /cover no-repeat;
+}
+
+.stars {
+  height: 60px;
+  overflow: hidden;
+}
+
+.tmp_es {
+  background: url('../img/star-outline.svg') center center /cover no-repeat;
+}
+
+.tmp_fs {
+    background: url('../img/star-filled.svg') center center /cover no-repeat;
+}
